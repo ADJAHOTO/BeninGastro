@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # restauration-benin
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -31,3 +32,7 @@ npm run dev
 ```sh
 npm run build
 ```
+=======
+# BéninGastro
+Site Web spécialisé dans a mise en valeur de Bénin Gastro au Bénin
+>>>>>>> origin/main
