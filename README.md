@@ -35,4 +35,9 @@ npm run build
 =======
 # BéninGastro
 Site Web spécialisé dans a mise en valeur de Bénin Gastro au Bénin
+
+## Déploiyé avec Netlify
+# Voici le lien en demo pour beninGastro
+
+https://beningastro.netlify.app/
 >>>>>>> origin/main
