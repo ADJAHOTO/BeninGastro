@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import AnimatedText from "@/components/AnimatedText.vue";
+import { motion } from 'motion-v'
 
 // Liste des images
 const images = [
@@ -50,10 +52,11 @@ const toggleMobileMenu = () => {
 </script>
 
 <template>
-   <!-- Navbar -->
-   <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
-    <nav class="max-w-8xl mr-auto flex justify-between items-center  p-4  text-white">
-      <h1 class="text-2xl font-bold">Restauration Bénin</h1>
+  <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
+    <nav class="max-w-8xl mr-auto flex justify-between items-center p-4 text-white">
+      <AnimatedText tag="h1" animation="blur-in" class="text-2xl font-bold">
+        BENIN GASTRO
+      </AnimatedText>
 
       <!-- Menu Desktop -->
       <ul class="hidden md:flex space-x-10 font-bold items-center">
@@ -61,16 +64,19 @@ const toggleMobileMenu = () => {
         <li><a href="#" class="hover:text-orange-500">Menu</a></li>
         <li><a href="#" class="hover:text-orange-500">Contacts</a></li>
         <li>
-            <button class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full">
-              Réservations 
-            </button>
+          <motion.button
+            class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
+            :whileHover="{ scale: 1.1 }"
+            :whilePress="{ scale: 0.95 }"
+          >
+            Réservations 
+          </motion.button>
         </li>
       </ul>
 
       <!-- Menu Mobile (Burger) -->
       <button @click="toggleMobileMenu" class="md:hidden focus:outline-none hover:bg-orange-500 ">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2"
-          viewBox="0 0 24 24">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
@@ -83,18 +89,36 @@ const toggleMobileMenu = () => {
         <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Menu</a></li>
         <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Contact</a></li>
         <li>
-            <button class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full">
-              Réservations
-            </button>
+          <motion.button 
+            class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
+            :whileHover="{ scale: 1.1 }"
+            :whilePress="{ scale: 0.95 }"
+          >
+            Réservations
+          </motion.button>
         </li>
       </ul>
     </div>
   </header>
 
-  <main :style="{ backgroundImage: `url('${images[currentIndex]}')` }"
-  class="h-screen flex justify-center items-center text-white text-8x font-bold transition-a duration-1000 bg-cover bg-center"
-  >
-    Bienvenue sur Restauration Bénin
+  <main :style="{ backgroundImage: `url('${images[currentIndex]}')` }" class="h-screen flex justify-center items-center text-white text-8x font-bold transition-a duration-1000 bg-cover bg-center">
+    <div class="flex flex-col justify-center items-center space-y-6 text-center">
+      <AnimatedText tag="p" animation="slide-left" class="intro text-2xl font-bold">
+        WELCOME TO BENIN GASTRO
+      </AnimatedText>
+
+      <AnimatedText tag="p" animation="bounce" class="intro2 text-2xl font-bold">
+        Découvrez le meilleur restaurant de la ville où vous <br><br>pouvez manger les meilleurs plats
+      </AnimatedText>
+
+      <motion.button
+            class="start hover:bg-orange-500 text-dark-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
+            :whileHover="{ scale: 1.1 }"
+            :whilePress="{ scale: 0.95 }"
+          >
+            Commencez des maitenants 
+      </motion.button>
+    </div>
   </main>
 </template>
 
@@ -107,9 +131,63 @@ main {
   justify-content: center;
   align-items: center;
   padding-top: 80px;
-  transition: background-image 1s ease-in-out; /* Effet de transition douce */
+  transition: background-image 1s ease-in-out; 
+  flex-direction: column;
 }
 
+.intro, .intro2 {
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 
+.intro {
+  font-size: 4.5rem;
+  margin-top: -100px;
+  margin-bottom: 60px;
+  transition: all 0.3s ease-in-out
+}
 
+.intro2 {
+  font-size: 2rem;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  transition: all 0.3s ease-in-out
+}
+
+@media (max-width: 768px) {
+  .intro {
+    font-size: 2.5rem; /* Taille réduite de la police sur mobile */
+    margin-top: 20px; /* Ajuste la marge en haut */
+    margin-bottom: 20px; /* Ajuste la marge entre l'intro et intro2 */
+    padding-left: 10px; /* Ajoute du padding sur la gauche pour espacement */
+    padding-right: 10px; /* Ajoute du padding sur la droite pour espacement */
+  }
+
+  .intro2 {
+    font-size: 1.3rem; /* Réduction de la taille de la police sur mobile */
+    margin-top: 15px; /* Ajuste la marge sur mobile */
+    margin-bottom: 40px; /* Ajout d'un espacement supplémentaire */
+  }
+
+  .start {
+    font-size: 1rem; /* Réduction de la taille de la police sur mobile */
+    padding: 15px 20px;
+    background-color: rgb(27, 4, 49);
+  }
+
+  .start:hover {
+    background-color: orange;
+  }
+}
+
+.start {
+    font-size: 1rem; /* Réduction de la taille de la police sur mobile */
+    padding: 15px 20px;
+    background-color: gray
+  }
+
+  .start:hover {
+    background-color: orange;
+  }  
 </style>
