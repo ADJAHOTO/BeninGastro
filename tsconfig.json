@@ -1,11 +1,22 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
+  "compilerOptions": {
+    "target": "esnext",                   // Compiler en ESNext
+    "module": "esnext",                   // Utiliser les modules ESNext
+    "moduleResolution": "node",           // Résolution des modules selon le modèle Node.js
+    "strict": true,                       // Activer les vérifications strictes
+    "esModuleInterop": true,              // Interopérabilité des modules ES
+    "skipLibCheck": true,                 // Ignorer les vérifications des types dans les bibliothèques
+    "forceConsistentCasingInFileNames": true, // Forcer une casse consistante pour les noms de fichiers
+    "allowJs": true,                      // Permettre l'utilisation de JavaScript
+    "jsx": "preserve",                    // Préserver JSX pour une utilisation dans des fichiers Vue
+    "resolveJsonModule": true,            // Résoudre les modules JSON
+    "baseUrl": "./",                      // Base pour la résolution des modules
+    "paths": {
+      "@/*": ["src/*"]                    // Configuration des alias pour Vue (utilisation de @ pour src)
     }
+  },
+  "include": [
+    "src/**/*",                           // Inclure tous les fichiers dans le répertoire src
+    "shims-vue.d.ts"                      // Inclure le fichier de déclaration de module .vue
   ]
 }

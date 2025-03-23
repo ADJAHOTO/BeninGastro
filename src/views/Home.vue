@@ -1,102 +1,115 @@
 <script setup>
-import { onMounted } from "vue";
-import { animate } from "motion-v";
+import { ref, onMounted, onUnmounted } from 'vue';
 
+// Liste des images
+const images = [
+  '/image 1.jpeg',
+  '/image 2.jpeg',
+  '/image 3.jpeg',
+  '/image 4.jpeg',
+  '/image 5.jpeg'
+];
+// Permet de stocker l'index de l'image actuelle
+const currentIndex = ref(0);
+let interval = null;
+
+// Fonction pour changer l'image
+const changeImage = () => {
+  try {
+    console.log("Tentative de changer l'image...");
+    currentIndex.value = (currentIndex.value + 1) % images.length;
+
+    // Vérification si l'image est chargée
+    const testImage = new Image();
+    testImage.src = images[currentIndex.value];
+    testImage.onload = () => console.log("Image chargée avec succès :", testImage.src);
+    testImage.onerror = () => console.error("Erreur de chargement de l'image :", testImage.src);
+
+  } catch (error) {
+    console.error("Erreur dans changeImage :", error);
+  }
+};
+
+// Démarrer l'animation au montage du composant
 onMounted(() => {
-  animate(".hero-image", { opacity: [0, 1], scale: [0.8, 1] }, { duration: 1 });
-  animate(".hero-text", { x: [-50, 0], opacity: [0, 1] }, { duration: 1 });
+  interval = setInterval(changeImage, 3000); // Changement toutes les 3 secondes
 });
+
+// Nettoyer l'intervalle lors de la destruction du composant
+onUnmounted(() => {
+  clearInterval(interval);
+});
+
+// Etat pour le menu mobile
+const isMobileMenuOpen = ref(false);
+
+// Fonction pour ouvrir/fermer le menu mobile
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
 </script>
 
 <template>
-  <div class="min-h-screen bg-white">""
-    <!-- Navigation améliorée -->
-    <header class="flex justify-between items-center p-4 sm:p-6 lg:px-20 lg:py-8">
-      <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">Restauration Bénin</h1>
-      
-      <!-- Menu Burger amélioré -->
-      <button @click="toggleMenu" class="md:hidden text-green-600 p-2 hover:bg-gray-100 rounded-lg transition">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+   <!-- Navbar -->
+   <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
+    <nav class="max-w-8xl mr-auto flex justify-between items-center  p-4  text-white">
+      <h1 class="text-2xl font-bold">Restauration Bénin</h1>
+
+      <!-- Menu Desktop -->
+      <ul class="hidden md:flex space-x-10 font-bold items-center">
+        <li><a href="#" class="hover:text-orange-500">Accueil</a></li>
+        <li><a href="#" class="hover:text-orange-500">Menu</a></li>
+        <li><a href="#" class="hover:text-orange-500">Contacts</a></li>
+        <li>
+            <button class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full">
+              Réservations 
+            </button>
+        </li>
+      </ul>
+
+      <!-- Menu Mobile (Burger) -->
+      <button @click="toggleMobileMenu" class="md:hidden focus:outline-none hover:bg-orange-500 ">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
+    </nav>
 
-      <!-- Menu Mobile optimisé -->
-      <nav 
-        :class="isMenuOpen ? 'flex' : 'hidden'"
-        class="absolute top-16 left-0 w-full bg-white shadow-lg flex-col items-center space-y-4 py-4 md:py-0 md:relative md:flex md:flex-row md:space-x-4 lg:space-x-8 md:shadow-none"
-      >
-        <a href="#" class="text-lg md:text-base lg:text-lg text-green-600 font-semibold hover:bg-gray-50 p-2 rounded">Home</a>
-        <a href="#" class="text-lg md:text-base lg:text-lg text-gray-600 hover:text-green-600 hover:bg-gray-50 p-2 rounded">About</a>
-        <a href="#" class="text-lg md:text-base lg:text-lg text-gray-600 hover:text-green-600 hover:bg-gray-50 p-2 rounded">Menu</a>
-        <a href="#" class="text-lg md:text-base lg:text-lg text-gray-600 hover:text-green-600 hover:bg-gray-50 p-2 rounded">Contact</a>
-      </nav>
-    </header>
+    <!-- Menu Mobile (Dropdown) -->
+    <div v-if="isMobileMenuOpen" class="md:hidden absolute top-full left-0 w-full bg-black/80 text-white p-4 font-bold justify-center items-center">
+      <ul class="space-y-4 text-center">
+        <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Accueil</a></li>
+        <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Menu</a></li>
+        <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Contact</a></li>
+        <li>
+            <button class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full">
+              Réservations
+            </button>
+        </li>
+      </ul>
+    </div>
+  </header>
 
-    <!-- Section Hero améliorée -->
-    <section class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20">
-      <div class="hero-text space-y-4 md:space-y-6 lg:space-y-8 max-w-md lg:max-w-xl mb-8 md:mb-0">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-green-600 leading-tight">
-          Welcome! Try our food
-        </h2>
-        <p class="text-base sm:text-lg md:text-xl text-gray-700">
-          Nothing brings people together like good food.
-        </p>
-        <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3">
-          <button class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition text-sm sm:text-base">
-            View Menu
-          </button>
-          <button class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 text-green-600 rounded-lg shadow-md hover:bg-gray-200 transition text-sm sm:text-base">
-            Reserve Table
-          </button>
-          <button class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 text-green-600 rounded-lg shadow-md hover:bg-gray-200 transition text-sm sm:text-base">
-            Track Order
-          </button>
-        </div>
-      </div>
-
-      <!-- Image responsive améliorée -->
-      <div class="hero-image w-full md:w-1/2 lg:w-2/5 xl:w-1/3 mt-8 md:mt-0">
-        <img
-          src="/src/assets/salade.jpeg"
-          alt="Fresh Salad"
-          class="w-full h-auto max-w-2xl rounded-lg shadow-lg transform hover:scale-105 transition duration-300"
-        />
-      </div>
-    </section>
-  </div>
+  <main :style="{ backgroundImage: `url('${images[currentIndex]}')` }"
+  class="h-screen flex justify-center items-center text-white text-8x font-bold transition-a duration-1000 bg-cover bg-center"
+  >
+    Bienvenue sur Restauration Bénin
+  </main>
 </template>
 
 <style scoped>
-/* Ajout de transitions fluides */
-nav {
-  transition: all 0.3s ease;
+main {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+  transition: background-image 1s ease-in-out; /* Effet de transition douce */
 }
 
-/* Ajustements pour les très petits écrans */
-@media (max-width: 360px) {
-  header {
-    padding: 1rem;
-  }
-  
-  .hero-text h2 {
-    font-size: 1.5rem;
-  }
-  
-  button {
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-  }
-}
 
-/* Conservation des animations originales */
-.hero-text {
-  opacity: 0;
-  transform: translateX(-50px);
-}
 
-.hero-image {
-  opacity: 0;
-  transform: scale(0.8);
-}
 </style>
