@@ -56,23 +56,32 @@ const toggleMobileMenu = () => {
 <template>
   <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
     <nav class="max-w-8xl mr-auto flex justify-between items-center p-4 text-white">
-      <AnimatedText tag="h1" animation="blur-in" class="text-2xl font-extrabold">
+      <AnimatedText tag="h1" animation="blur-in" class="text-2xl font-extrabold ">
         BENIN GASTRO
       </AnimatedText>
 
       <!-- Menu Desktop -->
       <ul class="hidden md:flex space-x-10 font-bold items-center">
-        <li><a href="#" class="hover:text-orange-500">Accueil</a></li>
-        <li><a href="#" class="hover:text-orange-500">Menu</a></li>
-        <li><a href="#" class="hover:text-orange-500">Contacts</a></li>
+        <router-link to="/">
+        <li><a class="hover:text-orange-500">Accueil</a></li>
+        </router-link>
+        <router-link to="/Dashboard">
+          <li><a  class="hover:text-orange-500">Dashboard</a></li>
+        </router-link>
+        <router-link to="/Contacts">
+          <li><a class="hover:text-orange-500">Contactez-nous</a></li>
+        </router-link>
         <li>
-          <motion.button
-            class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
-            :whileHover="{ scale: 1.1 }"
-            :whilePress="{ scale: 0.95 }"
-          >
-            Réservations 
-          </motion.button>
+          <router-link to="/Dashboard">
+              <motion.button
+              class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
+              :whileHover="{ scale: 1.1 }"
+              :whilePress="{ scale: 0.95 }"
+            >
+              Réservations 
+            </motion.button>
+
+          </router-link>
         </li>
       </ul>
 
@@ -87,17 +96,25 @@ const toggleMobileMenu = () => {
     <!-- Menu Mobile (Dropdown) -->
     <div v-if="isMobileMenuOpen" class="md:hidden absolute top-full left-0 w-full bg-black/80 text-white p-4 font-bold justify-center items-center">
       <ul class="space-y-4 text-center">
-        <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Accueil</a></li>
-        <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Menu</a></li>
-        <li><a href="#" class="block hover:text-gray-300 hover:text-orange-500">Contact</a></li>
+        <router-link to="/">
+        <li><a  class="block hover:text-orange-500 hover:text-orange-500">Accueil</a></li>
+        </router-link>
+        <router-link to="/Dashboard">
+          <li><a class="block hover:text-orange-500 hover:text-orange-500">Dashboard</a></li>
+        </router-link>  
+        <router-link to="/Contacts">
+          <li><a class="block hover:text-orange-500 hover:text-orange-500">Contactez-nous</a></li>
+        </router-link>  
         <li>
-          <motion.button 
-            class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
-            :whileHover="{ scale: 1.1 }"
-            :whilePress="{ scale: 0.95 }"
-          >
-            Réservations
-          </motion.button>
+          <router-link to="/Dashboard">
+              <motion.button 
+              class="bg-transparent hover:bg-orange-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
+              :whileHover="{ scale: 1.1 }"
+              :whilePress="{ scale: 0.95 }"
+            >
+              Réservations
+            </motion.button>
+          </router-link>
         </li>
       </ul>
     </div>
