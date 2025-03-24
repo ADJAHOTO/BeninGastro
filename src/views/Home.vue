@@ -201,6 +201,9 @@ main {
   .start:hover {
     background-color: orange;
   }
+  ul li {
+    padding: 5px;
+  }
 }
 
 .start {
