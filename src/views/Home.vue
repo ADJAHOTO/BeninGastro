@@ -49,12 +49,14 @@ const isMobileMenuOpen = ref(false);
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
+
+
 </script>
 
 <template>
   <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
     <nav class="max-w-8xl mr-auto flex justify-between items-center p-4 text-white">
-      <AnimatedText tag="h1" animation="blur-in" class="text-2xl font-bold">
+      <AnimatedText tag="h1" animation="blur-in" class="text-2xl font-extrabold">
         BENIN GASTRO
       </AnimatedText>
 
@@ -111,13 +113,16 @@ const toggleMobileMenu = () => {
         Découvrez le meilleur restaurant de la ville où vous <br><br>pouvez manger les meilleurs plats
       </AnimatedText>
 
-      <motion.button
+      <router-link to="/SignIn">
+        <motion.button
             class="start hover:bg-orange-500 text-dark-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
             :whileHover="{ scale: 1.1 }"
             :whilePress="{ scale: 0.95 }"
+            
           >
             Commencez des maitenants 
-      </motion.button>
+        </motion.button>
+      </router-link>
     </div>
   </main>
 </template>
@@ -157,21 +162,21 @@ main {
 
 @media (max-width: 768px) {
   .intro {
-    font-size: 2.5rem; /* Taille réduite de la police sur mobile */
-    margin-top: 20px; /* Ajuste la marge en haut */
-    margin-bottom: 20px; /* Ajuste la marge entre l'intro et intro2 */
-    padding-left: 10px; /* Ajoute du padding sur la gauche pour espacement */
-    padding-right: 10px; /* Ajoute du padding sur la droite pour espacement */
+    font-size: 2.5rem;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    padding-left: 10px; 
+    padding-right: 10px; 
   }
 
   .intro2 {
-    font-size: 1.3rem; /* Réduction de la taille de la police sur mobile */
-    margin-top: 15px; /* Ajuste la marge sur mobile */
-    margin-bottom: 40px; /* Ajout d'un espacement supplémentaire */
+    font-size: 1.3rem; 
+    margin-top: 15px; 
+    margin-bottom: 40px; 
   }
 
   .start {
-    font-size: 1rem; /* Réduction de la taille de la police sur mobile */
+    font-size: 1rem;
     padding: 15px 20px;
     background-color: rgb(27, 4, 49);
   }
