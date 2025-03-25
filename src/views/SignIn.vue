@@ -1,18 +1,18 @@
 <template>
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-800 to-blue-900 p-4">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500  p-4">
       <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full animate-fade-in">
-        <h2 class="text-2xl font-bold text-center text-indigo-800 mb-8">Sign In</h2>
+        <h2 class="text-2xl font-bold text-center text-indigo-800 mb-8">Connexion</h2>
         
         <form @submit.prevent="handleSignIn" class="space-y-6">
           <div>
             <label class="block text-indigo-900 font-semibold mb-2">Email</label>
-            <input v-model="form.email" type="email" class="input-field" placeholder="Enter your email" />
+            <input v-model="form.email" type="email" class="input-field" placeholder="Entrez votre Email" />
             <p v-if="errors.email" class="error-text">{{ errors.email }}</p>
           </div>
   
           <div>
-            <label class="block text-indigo-900 font-semibold mb-2">Password</label>
-            <input v-model="form.password" type="password" class="input-field" placeholder="Enter your password" />
+            <label class="block text-indigo-900 font-semibold mb-2">Mot de Passe</label>
+            <input v-model="form.password" type="password" class="input-field" placeholder="Entrez votre Mot de Passe" />
             <p v-if="errors.password" class="error-text">{{ errors.password }}</p>
           </div>
   
@@ -23,12 +23,14 @@
             <a href="#" class="text-indigo-600 hover:underline text-sm">Forgot password?</a>
           </div>
   
-          <button type="submit" class="submit-button">Sign In</button>
+          <router-link to="/Dashboard">
+            <button type="submit" class="submit-button">Connexion</button>
+          </router-link>
         </form>
   
         <p class="text-center text-gray-600 mt-6">
           Don’t have an account?
-          <router-link to="/SignUp" class="text-indigo-800 font-semibold hover:text-blue-900 transition-colors duration-300">Sign up</router-link>
+          <router-link to="/SignUp" class="text-indigo-800 font-semibold hover:text-orange-500 transition-colors duration-300">Inscrivez-vous</router-link>
         </p>
       </div>
     </div>
@@ -88,6 +90,7 @@
   .submit-button {
     width: 100%;
     padding: 12px;
+    margin-top: 16px;
     background-color: indigo;
     color: white;
     font-weight: bold;

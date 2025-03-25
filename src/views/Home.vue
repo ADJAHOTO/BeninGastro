@@ -95,7 +95,7 @@ const toggleMobileMenu = () => {
 
     <!-- Menu Mobile (Dropdown) -->
     <div v-if="isMobileMenuOpen" class="md:hidden absolute top-full left-0 w-full bg-black/80 text-white p-4 font-bold justify-center items-center">
-      <ul class="space-y-4 text-center">
+      <ul class="space-y-3 text-center">
         <router-link to="/">
         <li><a  class="block hover:text-orange-500 hover:text-orange-500">Accueil</a></li>
         </router-link>
@@ -202,7 +202,7 @@ main {
     background-color: orange;
   }
   ul li {
-    padding: 5px;
+    padding: 8px;
   }
 }
 

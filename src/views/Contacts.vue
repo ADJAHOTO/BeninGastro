@@ -1,11 +1,11 @@
 <template>
     <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 p-4">
       <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full animate-fade-in">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Contact Us</h2>
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Contactez-Nous</h2>
         
         <form @submit.prevent="handleSubmit" class="space-y-6">
           <div>
-            <label class="block text-gray-900 font-semibold mb-2">Name</label>
+            <label class="block text-gray-900 font-semibold mb-2">Nom d'Utiisateur</label>
             <input v-model="form.name" type="text" class="input-field" placeholder="John Doe" />
             <p v-if="errors.name" class="error-text">{{ errors.name }}</p>
           </div>
@@ -18,11 +18,11 @@
   
           <div>
             <label class="block text-gray-900 font-semibold mb-2">Message</label>
-            <textarea v-model="form.message" class="input-field h-32 resize-none" placeholder="Your message"></textarea>
+            <textarea v-model="form.message" class="input-field h-32 resize-none" placeholder="Votre message"></textarea>
             <p v-if="errors.message" class="error-text">{{ errors.message }}</p>
           </div>
   
-          <button type="submit" class="submit-button">Send</button>
+          <button type="submit" class="submit-button">Envoyer</button>
         </form>
       </div>
     </div>
